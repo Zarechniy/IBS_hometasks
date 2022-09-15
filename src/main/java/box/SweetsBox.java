@@ -4,7 +4,6 @@ import sweets.Bounty;
 import sweets.Mars;
 import sweets.Snickers;
 import sweets.Sweets;
-
 import java.util.ArrayList;
 
 public class SweetsBox implements BoxInterface {
@@ -85,9 +84,11 @@ public class SweetsBox implements BoxInterface {
     @Override
     public Sweets findMinWeight() {
         Sweets minWeightSweet = null;
-        for (int i = 0; i < sweetsList.size() - 1; i++) {
-            if (sweetsList.get(i).getWeight() <= sweetsList.get(i + 1).getWeight()) {
-                minWeightSweet = sweetsList.get(i);
+        int min = sweetsList.get(0).getWeight();
+
+        for (Sweets sweets : sweetsList) {
+            if (sweets.getWeight() <= min) {
+                minWeightSweet = sweets;
             }
         }
         return minWeightSweet;
@@ -96,9 +97,11 @@ public class SweetsBox implements BoxInterface {
     @Override
     public Sweets findMinPrice() {
         Sweets minPriceSweet = null;
-        for (int i = 0; i < sweetsList.size() - 1; i++) {
-            if (sweetsList.get(i).getPrice() <= sweetsList.get(i + 1).getPrice()) {
-                minPriceSweet = sweetsList.get(i);
+        int min = sweetsList.get(0).getPrice();
+
+        for (Sweets sweets : sweetsList) {
+            if (sweets.getPrice() <= min) {
+                minPriceSweet = sweets;
             }
         }
         return minPriceSweet;

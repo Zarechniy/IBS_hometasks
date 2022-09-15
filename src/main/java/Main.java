@@ -15,6 +15,10 @@ public class Main {
         box.addSweets(new Snickers());
         box.addSweets(new Bounty());
 
+        System.out.println("Info before optimisation: " + "\n");
+        System.out.println(box.BoxWeight() + "\n" + box.BoxPrice());
+        box.infoAboutSweets();
+
         //Условие удаления по весу
         while (box.BoxWeightInt() > box.MaxBoxWeight) {
             box.removeSweets(box.findMinWeight());
@@ -25,10 +29,9 @@ public class Main {
 //            box.removeSweets(box.findMinPrice());
 //        }
 
-        System.out.println(box.BoxWeight());
-        System.out.println(box.BoxPrice());
+        System.out.println("\n" + "Info after optimisation: " + "\n");
+        System.out.println(box.BoxWeight() + "\n" + box.BoxPrice());
         box.infoAboutSweets();
 
-        System.out.println("CONGRATULATIONS! WE'VE FOUND THE BEST SWEETBOX!");
     }
 }
