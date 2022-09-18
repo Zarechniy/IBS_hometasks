@@ -24,7 +24,7 @@ public class Main {
             }
         }
 
-        String newString = builder.toString().replaceAll("\\p{P}", " ").replaceAll("\\s", " ");
+        String newString = builder.toString().replaceAll("\\p{Punct}", " ").replaceAll("\\s", " ");
 
         String delimiter = " ";
         list = newString.split(delimiter);
