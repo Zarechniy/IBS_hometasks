@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, EmptyFileException {
 
         //имя файла text.txt - лежит в корне проекта
 
@@ -12,15 +12,19 @@ public class Main {
         Path file;
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-        file = Path.of(reader.readLine());
+            file = Path.of(reader.readLine());
         }
 
         StringBuilder builder = new StringBuilder();
         try(FileReader fileReader = new FileReader(file.toAbsolutePath().toString())) {
-            while (fileReader.ready()) {
-                char currentChar;
-                currentChar = (char) fileReader.read();
-                builder.append(currentChar);
+            if (fileReader.read() == -1) {
+                throw new EmptyFileException();
+            } else {
+                while (fileReader.ready()) {
+                    char currentChar;
+                    currentChar = (char) fileReader.read();
+                    builder.append(currentChar);
+                }
             }
         }
 
