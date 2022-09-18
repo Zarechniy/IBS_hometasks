@@ -29,6 +29,9 @@ public class Main {
         }
 
         String newString = builder.toString().replaceAll("\\p{Punct}", " ").replaceAll("\\s", " ");
+        if (!newString.contains("[a-zA-Z]+")) {
+            throw new EmptyFileException();
+        }
 
         String delimiter = " ";
         list = newString.split(delimiter);
