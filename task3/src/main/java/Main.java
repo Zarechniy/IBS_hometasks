@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -31,32 +32,43 @@ public class Main {
         System.out.println("Список компаний: ");
         companies.forEach(Company::getNameAndFoundationDate);
 
-        AtomicInteger count = new AtomicInteger();
         System.out.println("\n" + "Список просроченных ценных бумаг: ");
         securities.forEach(security -> {
             try {
                 security.expiredSecuritiesPrintInfo();
-                count.getAndIncrement();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         });
 
+        AtomicInteger count = new AtomicInteger();
+        securities.forEach(security -> {
+            SimpleDateFormat format = new SimpleDateFormat();
+            format.applyPattern("dd.MM.yyyy");
+            String date = security.getDate();
+            Date currentDate = new Date();
+
+            int result = 0;
+            try {
+                result = format.parse(date).compareTo(currentDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (result < 0) {
+                count.getAndIncrement();
+            }
+        });
+
         System.out.println("\n" + "Общее количество просроченных бумаг: " + count);
 
-        System.out.println("\n" + "Введите запрос:");
+        System.out.println("\n" + "Введите запрос даты:");
 
-        String currencyRub = "RUB";
-        String currencyEu = "EU";
-        String currencyUsd = "USD";
         String userInsert = null;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             userInsert = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("\n");
 
         DateCheck dateCheck = new DateCheck();
         assert userInsert != null;
@@ -96,45 +108,59 @@ public class Main {
                     company.getNameAndFoundationDate();
                 }
             }
-        } else if (userInsert.equalsIgnoreCase(currencyRub)) {
-            securities.forEach(security -> {
-                if (security.getCurrency().contains("RUB")) {
-                    companies.forEach(company -> {
-                        if (company.getSecurities().contains(security)) {
-                            System.out.print("For: ");
-                            System.out.println("ID " + company.getId());
-                        }
-                    });
-                    System.out.println("Security code: " + security.getCode() + "\n");
-                }
-            });
-        } else if (userInsert.equalsIgnoreCase(currencyEu)) {
-            securities.forEach(security -> {
-                if (security.getCurrency().contains("EU")) {
-                    companies.forEach(company -> {
-                        if (company.getSecurities().contains(security)) {
-                            System.out.print("For: ");
-                            System.out.println("ID " + company.getId());
-                        }
-                    });
-                    System.out.println("Security code: " + security.getCode() + "\n");
-                }
-            });
-        } else if (userInsert.equalsIgnoreCase(currencyUsd)) {
-            securities.forEach(security -> {
-                if (security.getCurrency().contains("USD")) {
-                    companies.forEach(company -> {
-                        if (company.getSecurities().contains(security)) {
-                            System.out.print("For: ");
-                            System.out.println("ID " + company.getId());
-                        }
-                    });
-                    System.out.println("Security code: " + security.getCode() + "\n");
-                }
-            });
-
         }
-    }
+
+            System.out.println("\n" + "Введите запрос валюты:");
+
+            String currencyRub = "RUB";
+            String currencyEu = "EU";
+            String currencyUsd = "USD";
+            String userInsert1 = null;
+            try (BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in))) {
+                userInsert1 = reader1.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            assert userInsert1 != null;
+            if (userInsert1.equalsIgnoreCase(currencyRub)) {
+                securities.forEach(security -> {
+                    if (security.getCurrency().contains("RUB")) {
+                        companies.forEach(company -> {
+                            if (company.getSecurities().contains(security)) {
+                                System.out.print("For: ");
+                                System.out.println("ID " + company.getId());
+                            }
+                        });
+                        System.out.println("Security code: " + security.getCode() + "\n");
+                    }
+                });
+            } else if (userInsert1.equalsIgnoreCase(currencyEu)) {
+                securities.forEach(security -> {
+                    if (security.getCurrency().contains("EU")) {
+                        companies.forEach(company -> {
+                            if (company.getSecurities().contains(security)) {
+                                System.out.print("For: ");
+                                System.out.println("ID " + company.getId());
+                            }
+                        });
+                        System.out.println("Security code: " + security.getCode() + "\n");
+                    }
+                });
+            } else if (userInsert1.equalsIgnoreCase(currencyUsd)) {
+                securities.forEach(security -> {
+                    if (security.getCurrency().contains("USD")) {
+                        companies.forEach(company -> {
+                            if (company.getSecurities().contains(security)) {
+                                System.out.print("For: ");
+                                System.out.println("ID " + company.getId());
+                            }
+                        });
+                        System.out.println("Security code: " + security.getCode() + "\n");
+                    }
+                });
+            }
+        }
 
 
     public static LocalDate toLocalDate(String inputDate) {

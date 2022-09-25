@@ -29,13 +29,11 @@ public class Security {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Security() {
     }
 
     /**
-     * 
      * @param date
      * @param code
      * @param name
@@ -87,22 +85,22 @@ public class Security {
         sb.append(Security.class.getName()).append('[');
         sb.append("name");
         sb.append('=');
-        sb.append(((this.name == null)?"<null>":this.name));
+        sb.append(((this.name == null) ? "<null>" : this.name));
         sb.append(',');
         sb.append("currency");
         sb.append('=');
-        sb.append(((this.currency == null)?"<null>":this.currency));
+        sb.append(((this.currency == null) ? "<null>" : this.currency));
         sb.append(',');
         sb.append("code");
         sb.append('=');
-        sb.append(((this.code == null)?"<null>":this.code));
+        sb.append(((this.code == null) ? "<null>" : this.code));
         sb.append(',');
         sb.append("date");
         sb.append('=');
-        sb.append(((this.date == null)?"<null>":this.date));
+        sb.append(((this.date == null) ? "<null>" : this.date));
         sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }
@@ -112,10 +110,10 @@ public class Security {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
-        result = ((result* 31)+((this.date == null)? 0 :this.date.hashCode()));
-        result = ((result* 31)+((this.currency == null)? 0 :this.currency.hashCode()));
-        result = ((result* 31)+((this.code == null)? 0 :this.code.hashCode()));
+        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
+        result = ((result * 31) + ((this.date == null) ? 0 : this.date.hashCode()));
+        result = ((result * 31) + ((this.currency == null) ? 0 : this.currency.hashCode()));
+        result = ((result * 31) + ((this.code == null) ? 0 : this.code.hashCode()));
         return result;
     }
 
@@ -128,7 +126,7 @@ public class Security {
             return false;
         }
         Security rhs = ((Security) other);
-        return (((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.date == rhs.date)||((this.date!= null)&&this.date.equals(rhs.date))))&&((this.currency == rhs.currency)||((this.currency!= null)&&this.currency.equals(rhs.currency))))&&((this.code == rhs.code)||((this.code!= null)&&this.code.equals(rhs.code))));
+        return (((((this.name == rhs.name) || ((this.name != null) && this.name.equals(rhs.name))) && ((this.date == rhs.date) || ((this.date != null) && this.date.equals(rhs.date)))) && ((this.currency == rhs.currency) || ((this.currency != null) && this.currency.equals(rhs.currency)))) && ((this.code == rhs.code) || ((this.code != null) && this.code.equals(rhs.code))));
     }
 
     public String expiredSecuritiesToList() throws ParseException {
@@ -158,7 +156,8 @@ public class Security {
                     "дата истечения " + getDate() + "\n" +
                     "название организации: " + getName()
             );
-            }
         }
-
     }
+}
+
+
