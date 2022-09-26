@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Parser parser = new Parser();
         Shares shares = parser.parse();
@@ -63,12 +63,8 @@ public class Main {
 
         System.out.println("\n" + "Введите запрос даты:");
 
-        String userInsert = null;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            userInsert = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String userInsert = reader.readLine();
 
         DateCheck dateCheck = new DateCheck();
         assert userInsert != null;
@@ -115,12 +111,7 @@ public class Main {
             String currencyRub = "RUB";
             String currencyEu = "EU";
             String currencyUsd = "USD";
-            String userInsert1 = null;
-            try (BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in))) {
-                userInsert1 = reader1.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String userInsert1 = reader.readLine();
 
             assert userInsert1 != null;
             if (userInsert1.equalsIgnoreCase(currencyRub)) {
@@ -160,6 +151,7 @@ public class Main {
                     }
                 });
             }
+        reader.close();
         }
 
 
